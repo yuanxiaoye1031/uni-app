@@ -1,4 +1,5 @@
 {
+  "lazyCodeLoading": "requiredComponents ",
   "pages": [{
     "path": "pages/home/home",
     "style": {
@@ -62,5 +63,25 @@
         "selectedIconPath": "static/tab_icons/my-active.png"
       }
     ]
-  }
+  },
+  "subPackages": [{
+    "root": "subpackage",
+    "pages": [{
+      "path": "goods_detail/goods_detail",
+      "style": {
+        // "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+
+    }    ,{
+                    "path" : "goods_list/goods_list",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
+  }]
 }
