@@ -77,7 +77,7 @@
                     "path" : "goods_list/goods_list",
                     "style" :                                                                                    
                 {
-                    "navigationBarTitleText": "",
+                    // "navigationBarTitleText": "",
                     "enablePullDownRefresh": false
                 }
                 
