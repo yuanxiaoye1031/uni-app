@@ -10,8 +10,8 @@
       return {
         
       };
-    }
-  }
+    },
+}
 </script>
 
 <style lang="scss">
