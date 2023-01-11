@@ -1,6 +1,6 @@
 <template>
   <view>
-    
+    商品详情页
   </view>
 </template>
 
@@ -9,14 +9,11 @@
     data() {
       return {
         
-      }
-    },
-    methods: {
-      
+      };
     }
   }
 </script>
 
-<style>
+<style lang="scss">
 
 </style>
