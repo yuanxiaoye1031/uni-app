@@ -48,7 +48,9 @@
 </template>
 
 <script>
+  import badegMixin from '@/mixins/tabbsr-badge.js'
   export default {
+    mixins:[badegMixin],
     data() {
       return {
         //轮播图数组

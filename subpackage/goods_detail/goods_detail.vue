@@ -48,6 +48,7 @@
 </template>
 
 <script>
+  import {mapState,mapGetters} from 'vuex'
   export default {
     data() {
       return {
@@ -58,7 +59,7 @@
             }, {
               icon: 'cart',
               text: '购物车',
-              info: 2
+              info: 0
             }],
             // 右侧按钮组的配置对象
             buttonGroup: [{
@@ -74,11 +75,28 @@
             ]
       };
     },
+    computed:{
+      ...mapState('moduleCart',['cart']),
+      ...mapGetters('moduleCart',['total'])
+    },
+    watch:{
+      total:{
+        immediate:true,
+        
+        handler(newVal){
+          const findResult = this.options.find(x => x.text==='购物车')
+          if(findResult){
+            findResult.info=newVal
+          }
+        }
+      }
+    },
     onLoad(options) {
       const goods_id=options.goods_id
       this.getGoodsDetail(goods_id)
     },
     methods:{
+      
       //获取商品详情信息
       async getGoodsDetail(id){
         const {data : res} = await uni.$http.get('/api/public/v1/goods/detail',{goods_id:id})
@@ -104,6 +122,25 @@
           uni.switchTab({
             url:'/pages/cart/cart'
           })
+        }
+      },
+      
+      //点击加入购物车或购买
+      buttonClick(event){
+        if(event.content.text==='加入购物车'){
+          const goods={
+            goods_id:this.goods_info.goods_id,
+            goods_name:this.goods_info.goods_name,
+            goods_count:1,
+            goods_small_logo:this.goods_info.goods_small_logo,
+            goods_state:true ,
+            goods_price:this.goods_info.goods_price
+          }
+          this.$store.dispatch('moduleCart/addToCart',goods)
+          uni.$showMsg('添加成功！')
+        }
+        else if(event.content.text==='立即购买'){
+          
         }
       }
     }

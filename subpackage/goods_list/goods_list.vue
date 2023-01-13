@@ -55,7 +55,8 @@
         uni.navigateTo({
           url:'/subpackage/goods_detail/goods_detail?goods_id='+goods.goods_id
         })
-      }
+      },
+      
     },
     
     //上拉触底，加载更多商品

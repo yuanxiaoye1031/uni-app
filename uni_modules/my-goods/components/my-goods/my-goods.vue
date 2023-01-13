@@ -1,18 +1,22 @@
 <template>
   <view>
     <view class="goods-item">
+      
       <!-- 左侧图片盒子 -->
-          <view class="goods-item-left">
-            <image :src="goods.goods_small_logo || defaultImg" class="goods-img"></image>
-          </view>
-          
-          <!-- 右侧内容盒子 -->
-          <view class="goods-item-right">
-            <view class="goods-name">{{goods.goods_name}}</view>
-            <view class="good-info-box">
-              <view class="goods-price">￥ {{goods.goods_price | tofixed}}</view>
-            </view>
-          </view>
+      <view class="goods-item-left">
+        <!-- 购物车中的左侧选择框 -->
+        <slot name="cartRadio"></slot>
+        <image :src="goods.goods_small_logo || defaultImg" class="goods-img" @click.native="gotoDetail(goods)"></image>
+      </view>
+      
+      <!-- 右侧内容盒子 -->
+      <view class="goods-item-right">
+        <view class="goods-name" @click.native="gotoDetail(goods)">{{goods.goods_name}}</view>
+        <view class="good-info-box">
+          <view class="goods-price" @click.native="gotoDetail(goods)">￥ {{goods.goods_price | tofixed}}</view>
+          <slot name="num-box" ></slot>
+        </view>
+      </view>
     </view>
   </view>
 </template>
@@ -35,19 +39,35 @@
       tofixed(num){
         return Number(num).toFixed(2)
       }
+    },
+    methods:{
+      //跳转到商品详情
+      gotoDetail(goods){
+        uni.navigateTo({
+          url:'/subpackage/goods_detail/goods_detail?goods_id='+goods.goods_id
+        })
+      },
+      
     }
   }
 </script>
 
 <style lang="scss">
+
   .goods-item{
     display: flex;
     padding: 10px 5px;
     border-bottom: 2px solid #f0f0f0;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+   
     
     
     .goods-item-left{
       margin-right: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       .goods-img{
         width: 100px;
         height: 100px;
@@ -65,7 +85,9 @@
       }
       
       .good-info-box{
-        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         .goods-price{
           font-size: 16px;
           color: #c00000;

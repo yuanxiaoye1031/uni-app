@@ -150,7 +150,7 @@
     
     
     onLoad() {
-      this.historyList=JSON.parse(uni.getStorageSync('history'))||[]
+      this.historyList=JSON.parse(uni.getStorageSync('history') || '[]')
     }
   }
 </script>
